@@ -9,7 +9,7 @@ namespace CRUD_operations
         static void Main()
         {
             SQLcrud crud = new SQLcrud();
-           // crud.GetEmployeeUsingreader();
+            //crud.GetEmployeeUsingreader();
 
 
            //DataTable dt= crud.GetEmployee();
@@ -17,9 +17,9 @@ namespace CRUD_operations
            // {
            //     Console.WriteLine("Employee ID: " + dr[0].ToString()  + " Employee name: "+ dr[1].ToString());
            // }
-            crud.CreateEmployee();
+           // crud.CreateEmployee();
             //crud.UpdateEmployee();
-            //crud.DeleteEmployee();
+            crud.DeleteEmployee();
            
         }
     }

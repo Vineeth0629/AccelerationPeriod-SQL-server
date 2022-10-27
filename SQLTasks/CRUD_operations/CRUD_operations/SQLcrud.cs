@@ -22,11 +22,11 @@ namespace CRUD_operations
             try
             {
                 sqlConnection.Open();
-                SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = "select * from employee";
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                sqlDataAdapter.Fill(ds, "Employee");
+                SqlCommand sqlCommand =  sqlConnection.CreateCommand();  // declare command
+                sqlCommand.CommandType = CommandType.Text;               //command type
+                sqlCommand.CommandText = "select * from employee";       //using inline query or stored procedure
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);     //creating a object for sql data adapter and add sql command
+                sqlDataAdapter.Fill(ds, "Employee");                                // fill data into dataset by using data adaptor fill method
             }
             catch(SqlException ex)
             {
@@ -49,15 +49,16 @@ namespace CRUD_operations
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = "select * from employee";
+                sqlCommand.CommandType = CommandType.StoredProcedure;  
+                sqlCommand.CommandText = "get_employee_details";
+               // sqlCommand.Parameters.AddWithValue("@id", 1);
                 sqlDataReader = sqlCommand.ExecuteReader();
                 
                 while (sqlDataReader.Read())
                 {
                    
 
-                        Console.WriteLine( "Employee ID: "+ sqlDataReader.GetValue(0) + "\nEmployee name: " + sqlDataReader.GetValue(1));                    
+                        Console.WriteLine( "Employee name: "+ sqlDataReader.GetValue(0) + "\nEmployee age: " + sqlDataReader.GetValue(1));                    
 
                 }
               
@@ -73,13 +74,14 @@ namespace CRUD_operations
           
 
         }
+        //create
         public void CreateEmployee()
         {
             try
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.CommandType = CommandType.StoredProcedure;           
                 Console.WriteLine("\nenter employee name\n");
                 string employeeName = Console.ReadLine();
                 Console.WriteLine("\nenter employee age\n");
@@ -89,7 +91,11 @@ namespace CRUD_operations
                 Console.WriteLine("\nenter employee salaryid\n");
                 int salaryid = Convert.ToInt32(Console.ReadLine());
 
-                sqlCommand.CommandText = "insert into employee values ('" + employeeName + "'," + age +  "," +departmentId +","  +salaryid + ")";
+                sqlCommand.CommandText = "create_employee";
+                sqlCommand.Parameters.AddWithValue("@name",employeeName);
+                sqlCommand.Parameters.AddWithValue("@age",age);
+                sqlCommand.Parameters.AddWithValue("depid",departmentId);
+                sqlCommand.Parameters.AddWithValue("salid",salaryid);
                 sqlCommand.ExecuteNonQuery();
             }
             catch(Exception ex)
@@ -110,14 +116,18 @@ namespace CRUD_operations
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 Console.WriteLine("\nenter employee id to update\n");
                  int employeeId = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine("\nenter employee age \n");
                 int empAge =  Convert.ToInt32( Console.ReadLine());
 
-                sqlCommand.CommandText = "update employee set empage =" + empAge+" where empid=" + employeeId ;
+                sqlCommand.CommandText = "update_employee" ;
+                sqlCommand.Parameters.AddWithValue("@age",empAge);
+                sqlCommand.Parameters.AddWithValue("@id", employeeId);
+
+
 
                 sqlCommand.ExecuteNonQuery();
             }
@@ -137,11 +147,13 @@ namespace CRUD_operations
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 Console.WriteLine("\nenter employee id to delete\n");
                 int employeeId = Convert.ToInt32(Console.ReadLine());
-                sqlCommand.CommandText = "delete from employee where empid=" + employeeId;
-         
+                sqlCommand.CommandText = "delete_employee";
+                sqlCommand.Parameters.AddWithValue("@id",employeeId);
+
+
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)

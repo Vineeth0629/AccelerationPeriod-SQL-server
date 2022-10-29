@@ -49,16 +49,19 @@ namespace CRUD_operations
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.CommandType = CommandType.StoredProcedure;  
-                sqlCommand.CommandText = "get_employee_details";
-               // sqlCommand.Parameters.AddWithValue("@id", 1);
+                sqlCommand.CommandType = CommandType.Text;
+                //sqlCommand.CommandType = CommandType.StoredProcedure;
+                //sqlCommand.CommandText = "get_employee_details";
+                sqlCommand.CommandText = "select * from VWemployee";  //view
+                // sqlCommand.Parameters.AddWithValue("@id", 1);
                 sqlDataReader = sqlCommand.ExecuteReader();
                 
                 while (sqlDataReader.Read())
                 {
                    
 
-                        Console.WriteLine( "Employee name: "+ sqlDataReader.GetValue(0) + "\nEmployee age: " + sqlDataReader.GetValue(1));                    
+                        Console.WriteLine("Employee name: " + sqlDataReader.GetValue(0) + "\nEmployee age: " + sqlDataReader.GetValue(1) +
+                            "\nDepartment id: " + sqlDataReader.GetValue(2) + "\nEmployee id: " + sqlDataReader.GetValue(3));
 
                 }
               

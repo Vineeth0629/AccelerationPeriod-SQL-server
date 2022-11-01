@@ -148,23 +148,38 @@ namespace ASP.Net_CRUDOperations
         }
 
         //update
-        public void UpdateEmployee()
+        public void UpdateEmployee(string employeeName, int age, int departmentId, int salaryid,int id)
         {
 
             try
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
+                sqlCommand.CommandText = "UpdateEmployeeDetails";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                Console.WriteLine("\nenter employee id to update\n");
-                int employeeId = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine("\nenter employee age \n");
-                int empAge = Convert.ToInt32(Console.ReadLine());
+                //Console.WriteLine("\nenter employee id to update\n");
+                //int employeeId = Convert.ToInt32(Console.ReadLine());
 
-                sqlCommand.CommandText = "update_employee";
-                sqlCommand.Parameters.AddWithValue("@age", empAge);
-                sqlCommand.Parameters.AddWithValue("@id", employeeId);
+                //Console.WriteLine("\nenter employee age \n");
+                //string empname =(Console.ReadLine());
+
+                //Console.WriteLine("\nenter employee age \n");
+                //int empAge = Convert.ToInt32(Console.ReadLine());
+
+                //Console.WriteLine("\nenter employee age \n");
+                //int department = Convert.ToInt32(Console.ReadLine());
+
+                //Console.WriteLine("\nenter employee age \n");
+                //int salary = Convert.ToInt32(Console.ReadLine());
+
+               
+                sqlCommand.Parameters.AddWithValue("@empid", id);
+
+                sqlCommand.Parameters.AddWithValue("@empname", employeeName);
+                sqlCommand.Parameters.AddWithValue("@empage", age);
+                sqlCommand.Parameters.AddWithValue("@departmentid", departmentId);
+                sqlCommand.Parameters.AddWithValue("@salaryid", salaryid);
 
 
 
@@ -180,17 +195,15 @@ namespace ASP.Net_CRUDOperations
             }
         }
         //Delete
-        public void DeleteEmployee()
+        public void DeleteEmployee(int empid)
         {
             try
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                Console.WriteLine("\nenter employee id to delete\n");
-                int employeeId = Convert.ToInt32(Console.ReadLine());
                 sqlCommand.CommandText = "delete_employee";
-                sqlCommand.Parameters.AddWithValue("@id", employeeId);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@empid", empid);
 
 
                 sqlCommand.ExecuteNonQuery();

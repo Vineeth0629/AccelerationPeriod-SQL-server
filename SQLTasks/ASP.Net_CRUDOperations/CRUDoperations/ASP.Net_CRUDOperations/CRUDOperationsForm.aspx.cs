@@ -28,7 +28,11 @@ namespace ASP.Net_CRUDOperations
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+
             string empName = txtEmployee.Text;
+
+            string empName1 = txtEmployee.Text;
+
             int age =Convert.ToInt32(txtage.Text == "" ? "0" : txtage.Text);
             int departmentId = Convert.ToInt32(DdlDepartment.SelectedItem.Value);
             int salaryId = Convert.ToInt32(DdlSalary.SelectedItem.Value);
@@ -49,5 +53,26 @@ namespace ASP.Net_CRUDOperations
         {
 
         }
+        //UPDATE
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+            int empid = Convert.ToInt32(Txtid1.Text);
+            string empName = txtEmployee.Text;
+            int age = Convert.ToInt32(txtage.Text == "" ? "0" : txtage.Text);
+            int departmentId = Convert.ToInt32(DdlDepartment.SelectedItem.Value);
+            int salaryId = Convert.ToInt32(DdlSalary.SelectedItem.Value);
+            obj.UpdateEmployee( empName,  age,  departmentId,  salaryId,  empid);
+
+        }
+        //DELETE
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            int empid = Convert.ToInt32(Txtid1.Text);
+            obj.DeleteEmployee(empid);
+
+        }
+
+      
     }
 }

@@ -144,7 +144,7 @@ namespace CRUD_operations
             }
         }
         //Delete
-            public void DeleteEmployee()
+        public void DeleteEmployee()
             {
             try
             {

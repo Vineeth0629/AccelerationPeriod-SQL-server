@@ -53,6 +53,10 @@ namespace ASP.Net_CRUDOperations
         {
 
         }
+        protected void DdlSalary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         //UPDATE
         protected void Button1_Click(object sender, EventArgs e)
         {

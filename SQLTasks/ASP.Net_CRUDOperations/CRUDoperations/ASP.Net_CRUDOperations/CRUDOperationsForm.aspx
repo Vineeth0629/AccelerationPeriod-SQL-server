@@ -15,7 +15,7 @@
                     <td> 
                         <asp:Label ID="Label1" runat="server" Text="Employyee Id:" BackColor="#FFCCFF"></asp:Label>
                     </td>
-                      <td>  <asp:TextBox ID="Txtid1" runat="server" BackColor="#CFECEC" BorderStyle="Solid" Font-Bold="True" OnTextChanged="Txtid1_TextChanged"></asp:TextBox></td>
+                      <td>  <asp:TextBox ID="Txtid1" runat="server" BackColor="#CFECEC" BorderStyle="Solid" Font-Bold="True" ></asp:TextBox></td>
 
               
                 <tr>
